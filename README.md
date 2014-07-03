@@ -1,4 +1,4 @@
-Timetator
+Numbertor
 =======
 Numbertor is a jQuery-based addon for input boxes, giving them a number sanitizer.
 [You can see a demo here](http://opensource.faroemedia.com/numbertor).
@@ -9,20 +9,21 @@ Usage
 ###### include in head:
 ```html
 <script src="jquery-1.11.0.min.js"></script>
-<script src="fm.timetator.jquery.js"></script>
+<script src="fm.numbertor.jquery.js"></script>
 ```
 
 ###### to activate replacement:
 ```javascript
-$('#inputBox').timetator();
+$('#inputBox').numbertor();
 ```
 
 ###### if you want to change settings:
 ```javascript
-$('#inputBox').timetator({
-    seperator: ':',        // the seperator used to seperate hours, minutes and seconds
-    useSeconds: false,     // if set to true, then seconds will also be used
-    useCap:	true		   // if set to true, the time value will be capped at 23:59
+$('#inputBox').numbertor({
+    decimals: 'auto',			// number of decimals to use
+    decimal_seperator: ',',		// the decimal seperator to be used
+    thousand_seperator: '.',	// the thousand seperator to be used
+    allow_empty: false			// if false, then value will be set to 0 when empty
 });
 ```
 
@@ -36,7 +37,7 @@ destroy            | This method is used to remove the instance of the plugin fr
 
 ###### Method usage
 ```javascript
-$('#inputBox').timetator('destroy');
+$('#inputBox').numbertor('destroy');
 ```
 
 

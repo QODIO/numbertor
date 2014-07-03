@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Timetator Plugin</title>
+	<title>Numbertor Plugin</title>
 	<style>
 		body {
 			font-family: sans-serif;
@@ -18,32 +18,47 @@
 		}
 	</style>
 	<script src="jquery-1.11.0.min.js"></script>
-	<script src="fm.timetator.jquery.js"></script>
+	<script src="fm.numbertor.jquery.js"></script>
 	<script>
 		$(function () {
-			$('#inputTimetator1').timetator();
+			$('#inputNumbertor1').numbertor();
 
-			$('#inputTimetator2').timetator({
-				useCap: false
+			$('#inputNumbertor2').numbertor({
+				decimals: 2
 			});
 
-			$('#inputTimetator3').timetator({
-				seperator: '.',
-				useSeconds: true
+			$('#inputNumbertor3').numbertor({
+				decimals: 2,
+				decimal_seperator: '.',
+				thousand_seperator: ','
+			});
+
+			$('#inputNumbertor4').numbertor({
+				allow_empty: false
+			});
+
+			$('#inputNumbertor5').numbertor({
+				allow_empty: true
 			});
 		});
 	</script>
 </head>
 <body>
 	<div id="wrapper">
-		<label for="inputTimetator1">default</label><br>
-		<input id="inputTimetator1" name="inputTimetator1" value=""><br>
+		<label for="inputNumbertor1">default</label><br>
+		<input id="inputNumbertor1" name="inputNumbertor1" value="1234,567"><br>
 		<br>
-		<label for="inputTimetator2">useCaps: false</label><br>
-		<input id="inputTimetator2" name="inputTimetator2" value="14:00"><br>
+		<label for="inputNumbertor2">decimals: 2</label><br>
+		<input id="inputNumbertor2" name="inputNumbertor2" value="1234,567"><br>
 		<br>
-		<label for="inputTimetator3">seperator: '.' and useSeconds: true</label><br>
-		<input id="inputTimetator3" name="inputTimetator2" value="01.15">
+		<label for="inputNumbertor3">decimal_seperator: '.' and thousand_seperator: ',' (english standard) <i>Notice that the input must adhere to the standard as well</i></label><br>
+		<input id="inputNumbertor3" name="inputNumbertor3" value="1234.567">
+		<br>
+		<label for="inputNumbertor4">allow_empty: false</label><br>
+		<input id="inputNumbertor4" name="inputNumbertor4" value="">
+		<br>
+		<label for="inputNumbertor5">allow_empty: true</label><br>
+		<input id="inputNumbertor5" name="inputNumbertor5" value="">
 	</div>
 
 </body>
