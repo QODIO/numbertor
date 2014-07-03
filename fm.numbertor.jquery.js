@@ -1,6 +1,6 @@
 /*
  Numbertor jQuery Plugin
- Numbertor is a jQuery-based addon for input boxes, giving them a time sanitizer.
+ Numbertor is a jQuery-based addon for input boxes, giving them a number sanitizer.
  version 1.0, Jan 13th, 2014
  by Ingi P. Jacobsen
 
