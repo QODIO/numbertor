@@ -16,14 +16,18 @@ Usage
 ```javascript
 $('#inputBox').numbertor();
 ```
+If you don't wan't to meddle with scripting, there is an alternative to activate replacement, by using inline markup. 
+```html
+<input type="text" class="numbertor" data-numbertor-allow-empty="true">
+```
 
 ###### if you want to change settings:
 ```javascript
 $('#inputBox').numbertor({
-    decimals: 'auto',			// number of decimals to use
-    decimal_seperator: ',',		// the decimal seperator to be used
-    thousand_seperator: '.',	// the thousand seperator to be used
-    allow_empty: false			// if false, then value will be set to 0 when empty
+    decimals: 'auto',        // number of decimals to use
+    decimalSeperator: ',',   // the decimal seperator to be used
+    thousandSeperator: '.',  // the thousand seperator to be used
+    allowEmpty: false        // if false, then value will be set to 0 when empty
 });
 ```
 

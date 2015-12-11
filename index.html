@@ -12,6 +12,11 @@
 		#wrapper {
 			padding: 15px;
 		}
+		label {
+			font-weight: bold;
+			padding-top: 16px;
+			display: block;
+		}
 		input {
 			padding: 5px;
 			font-size: 20px;
@@ -29,36 +34,40 @@
 
 			$('#inputNumbertor3').numbertor({
 				decimals: 2,
-				decimal_seperator: '.',
-				thousand_seperator: ','
+				decimalSeperator: '.',
+				thousandSeperator: ','
 			});
 
 			$('#inputNumbertor4').numbertor({
-				allow_empty: false
+				allowEmpty: false
 			});
 
 			$('#inputNumbertor5').numbertor({
-				allow_empty: true
+				allowEmpty: true
 			});
 		});
 	</script>
 </head>
 <body>
 	<div id="wrapper">
-		<label for="inputNumbertor1">default</label><br>
-		<input id="inputNumbertor1" name="inputNumbertor1" value="1234,567"><br>
+		<label for="inputNumbertor1">default</label>
+		<input id="inputNumbertor1" value="1234,567"><br>
 		<br>
-		<label for="inputNumbertor2">decimals: 2</label><br>
-		<input id="inputNumbertor2" name="inputNumbertor2" value="1234,567"><br>
+		<label for="inputNumbertor2">decimals: 2</label>
+		<input id="inputNumbertor2" value="1234,567"><br>
 		<br>
-		<label for="inputNumbertor3">decimal_seperator: '.' and thousand_seperator: ',' (english standard) <i>Notice that the input must adhere to the standard as well</i></label><br>
-		<input id="inputNumbertor3" name="inputNumbertor3" value="1234.567">
+		<label for="inputNumbertor3">decimalSeperator: '.' and thousandSeperator: ',' (english standard) <i>Notice that the input must adhere to the standard as well</i></label>
+		<input id="inputNumbertor3" value="1234.567">
 		<br>
-		<label for="inputNumbertor4">allow_empty: false</label><br>
-		<input id="inputNumbertor4" name="inputNumbertor4" value="">
+		<label for="inputNumbertor4">allowEmpty: false</label>
+		<input id="inputNumbertor4" value="">
 		<br>
-		<label for="inputNumbertor5">allow_empty: true</label><br>
-		<input id="inputNumbertor5" name="inputNumbertor5" value="">
+		<label for="inputNumbertor5">allowEmpty: true</label>
+		<input id="inputNumbertor5" value="">
+		<br>
+		<label for="inputNumbertor6">allowEmpty: true</label>
+		<pre>&lt;input class=&quot;numbertor&quot; id=&quot;inputNumbertor6&quot; value=&quot;1234,567&quot; data-numbertor-allow-empty=&quot;true&quot;&gt;</pre>
+		<input class="numbertor" id="inputNumbertor6" value="1234,567" data-numbertor-allow-empty="true">
 	</div>
 
 </body>

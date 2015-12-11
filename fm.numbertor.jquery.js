@@ -1,7 +1,7 @@
 /*
  Numbertor jQuery Plugin
  Numbertor is a jQuery-based addon for input boxes, giving them a number sanitizer.
- version 1.0, Jan 13th, 2014
+ version 1.1, Dec 11th, 2015
  by Ingi P. Jacobsen
 
  The MIT License (MIT)
@@ -29,10 +29,10 @@
 (function($) {
 	$.numbertor = function (element, options) {
 		var defaults = {
-			decimals:           'auto',
-			decimal_seperator:  ',',
-			thousand_seperator: '.',
-			allow_empty:        false
+			decimals:          'auto',
+			decimalSeperator:  ',',
+			thousandSeperator: '.',
+			allowEmpty:        false
 		};
 
 		var plugin = this;
@@ -55,38 +55,38 @@
 		};
 
 		var sanitize = function () {
-			$element.val(sanitizeNumber($element.val(), plugin.settings.decimals, plugin.settings.decimal_seperator, plugin.settings.thousand_seperator));
+			$element.val(sanitizeNumber($element.val(), plugin.settings.decimals, plugin.settings.decimalSeperator, plugin.settings.thousandSeperator));
 		};
 
 		var unsanitize = function () {
-			$element.val(unsanitizeNumber($element.val(), plugin.settings.decimals, plugin.settings.decimal_seperator, plugin.settings.thousand_seperator));
+			$element.val(unsanitizeNumber($element.val(), plugin.settings.decimals, plugin.settings.decimalSeperator, plugin.settings.thousandSeperator));
 		};
 		
 		var select = function () {
 			$element.select();
 		};
 		
-		var sanitizeNumber = function (number, decimals, decimal_seperator, thousand_seperator) {
+		var sanitizeNumber = function (number, decimals, decimalSeperator, thousandSeperator) {
 			decimals = decimals === undefined ? 'auto' : decimals;
-			decimal_seperator = decimal_seperator === undefined ? ',' : decimal_seperator;
-			thousand_seperator = thousand_seperator === undefined ? '.' : thousand_seperator;
+			decimalSeperator = decimalSeperator === undefined ? ',' : decimalSeperator;
+			thousandSeperator = thousandSeperator === undefined ? '.' : thousandSeperator;
 			if (number !== '') {
 				number = number.toString();
-				number = number.replace(/[^0-9,\.]/g,'').replace(thousand_seperator, '').replace(decimal_seperator, '.');
-				number = number_format(number, decimals, decimal_seperator, thousand_seperator);
-			} else if (!plugin.settings.allow_empty) {
+				number = number.replace(/[^0-9,\.]/g,'').replace(thousandSeperator, '').replace(decimalSeperator, '.');
+				number = number_format(number, decimals, decimalSeperator, thousandSeperator);
+			} else if (!plugin.settings.allowEmpty) {
 				number = 0;
-				number = number_format(number, decimals, decimal_seperator, thousand_seperator);
+				number = number_format(number, decimals, decimalSeperator, thousandSeperator);
 			}
 			return number;
 		};
 
-		var unsanitizeNumber = function (number, decimals, decimal_seperator, thousand_seperator) {
+		var unsanitizeNumber = function (number, decimals, decimalSeperator, thousandSeperator) {
 			decimals = decimals === undefined ? 'auto' : decimals;
-			decimal_seperator = decimal_seperator === undefined ? ',' : decimal_seperator;
-			thousand_seperator = thousand_seperator === undefined ? '.' : thousand_seperator;
+			decimalSeperator = decimalSeperator === undefined ? ',' : decimalSeperator;
+			thousandSeperator = thousandSeperator === undefined ? '.' : thousandSeperator;
 			if (number !== '') {
-				number = parseFloat(number.toString().replace(thousand_seperator, '').replace(decimal_seperator, '.')).toString().replace('.', decimal_seperator);
+				number = parseFloat(number.toString().replace(thousandSeperator, '').replace(decimalSeperator, '.')).toString().replace('.', decimalSeperator);
 			}
 			return number;
 		};
@@ -147,3 +147,21 @@
 	};
 
 }(jQuery));
+
+$(function () {
+	$('.numbertor').each(function () {
+		var $this = $(this);
+		var options = {};
+		$.each($this.data(), function (key, value) {
+			if (key.substring(0, 9) == 'numbertor') {
+				var value_temp = value.toString().replace(/'/g, '"');
+				value_temp = $.parseJSON(value_temp);
+				if (typeof value_temp == 'object') {
+					value = value_temp;
+				}
+				options[key.substring(9, 10).toLowerCase() + key.substring(10)] = value;
+			}
+		});
+		$this.numbertor(options);
+	});
+});
