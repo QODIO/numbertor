@@ -86,7 +86,7 @@
 			decimalSeperator = decimalSeperator === undefined ? ',' : decimalSeperator;
 			thousandSeperator = thousandSeperator === undefined ? '.' : thousandSeperator;
 			if (number !== '') {
-				number = parseFloat(number.toString().replace(thousandSeperator, '').replace(decimalSeperator, '.')).toString().replace('.', decimalSeperator);
+				number = parseFloat(number.toString().replace(/\s/g, '').replace(thousandSeperator, '').replace(decimalSeperator, '.')).toString().replace('.', decimalSeperator);
 			}
 			return number;
 		};
