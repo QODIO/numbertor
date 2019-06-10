@@ -1,25 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Numbertor Plugin</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:700,400,300" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" rel="stylesheet">    <![endif]-->
 	<style>
 		body {
-			font-family: sans-serif;
+			font-family: 'Open Sans', sans-serif;
 			margin: 0;
 			padding: 0;
+			background-color: #eee;
+
 		}
 		#wrapper {
-			padding: 15px;
+			padding: 0;
+			max-width: 1024px;
+			margin: 0 auto;
+			background-color: #fff;
+		}
+		#wrapper_inner {
+			padding: 1rem 5rem 7rem;
+			max-width: 1024px;
+			margin: 0 auto;
+		}
+		header {
+			padding-top: 2rem;
+			padding-bottom: 2rem;
+			margin-bottom: 2rem;
+		}
+		h1 {
+			font-weight: 400;
+			margin: 0;
+			font-size: 2.25rem;
+		}
+		h1 > small {
+			color: #888;
+		}
+		hr {
+			border: 0;
+			border-top: 1px solid #dcdcdc;
+		}
+		small {
+			color: #666;
+		}
+		section {
+			margin-bottom: 1.5rem;
 		}
 		label {
-			font-weight: bold;
-			padding-top: 16px;
 			display: block;
+			margin-bottom: 5px;
 		}
 		input {
 			padding: 5px;
-			font-size: 20px;
+			font-size: 16px;
+			border: 1px solid #dcdcdc;
+			font-family: 'Open Sans', sans-serif;
 		}
 	</style>
 	<script src="jquery-1.11.0.min.js"></script>
@@ -33,8 +71,8 @@
 			});
 
 			$('#inputNumbertor3').numbertor({
-				decimals: 2,
-				decimalSeperator: '.',
+				decimals:          2,
+				decimalSeperator:  '.',
 				thousandSeperator: ','
 			});
 
@@ -50,25 +88,73 @@
 </head>
 <body>
 	<div id="wrapper">
-		<label for="inputNumbertor1">default</label>
-		<input id="inputNumbertor1" value="1234,567"><br>
-		<br>
-		<label for="inputNumbertor2">decimals: 2</label>
-		<input id="inputNumbertor2" value="1234,567"><br>
-		<br>
-		<label for="inputNumbertor3">decimalSeperator: '.' and thousandSeperator: ',' (english standard) <i>Notice that the input must adhere to the standard as well</i></label>
-		<input id="inputNumbertor3" value="1234.567">
-		<br>
-		<label for="inputNumbertor4">allowEmpty: false</label>
-		<input id="inputNumbertor4" value="">
-		<br>
-		<label for="inputNumbertor5">allowEmpty: true</label>
-		<input id="inputNumbertor5" value="">
-		<br>
-		<label for="inputNumbertor6">Inline markup initialized</label>
-		<pre>&lt;input class=&quot;numbertor&quot; id=&quot;inputNumbertor6&quot; value=&quot;1234,567&quot; data-numbertor-allow-empty=&quot;true&quot;&gt;</pre>
-		<input class="numbertor" id="inputNumbertor6" value="1234,567" data-numbertor-allow-empty="true">
+		<div id="wrapper_inner">
+			<header>
+				<h1>
+					Numbertor
+					<small>by Qodio</small>
+				</h1>
+				<hr>
+				<small>
+					Numbertor is a jQuery-based addon for input boxes, giving them a number sanitizer.
+				</small>
+			</header>
+
+			<section>
+				<label for="inputNumbertor1">
+					Example 1:
+				</label>
+				<input id="inputNumbertor1" value="1234,567">
+			</section>
+
+			<section>
+				<label for="inputNumbertor2">
+					Example 2: <small>{ decimals: 2 }</small>
+				</label>
+				<input id="inputNumbertor2" value="1234,567">
+			</section>
+
+			<section>
+				<label for="inputNumbertor3">
+					Example 3: <small>{ decimals: 2, decimalSeperator: '.', thousandSeperator: ',' }</small><br>
+					<i>(english standard)</i><br>
+					<i>Notice that the input must adhere to the standard as well</i>
+				</label>
+				<input id="inputNumbertor3" value="1234.567">
+			</section>
+
+			<section>
+				<label for="inputNumbertor4">
+					Example 4: <small>{ allowEmpty: false }</small>
+				</label>
+				<input id="inputNumbertor4" value="">
+			</section>
+
+			<section>
+				<label for="inputNumbertor5">
+					Example 5: <small>{ allowEmpty: true }</small>
+				</label>
+				<input id="inputNumbertor5" value="">
+			</section>
+
+			<section>
+				<label for="inputNumbertor6">
+					Example 6:
+					Inline markup initialized<br>
+					<small><em>&lt;input class=&quot;numbertor&quot; id=&quot;inputNumbertor6&quot; value=&quot;1234,567&quot; data-numbertor-allow-empty=&quot;true&quot;&gt;</em></small>
+				</label>
+				<input class="numbertor" id="inputNumbertor6" value="1234,567" data-numbertor-allow-empty="true">
+			</section>
+
+		</div>
 	</div>
+
+	<a class="github-fork-ribbon" href="https://github.com/qodio/numbertor" title="Fork me on GitHub">Fork me on GitHub</a>
+	<style type="text/css">
+		.github-fork-ribbon:before {
+			background-color: #090
+		}
+	</style>
 
 </body>
 </html>
