@@ -1,8 +1,8 @@
 /*
  Numbertor jQuery Plugin
  Numbertor is a jQuery-based addon for input boxes, giving them a number sanitizer.
- version 1.1, Dec 11th, 2015
- by Ingi P. Jacobsen
+ version 1.2, Jun 10th, 2019
+ by Ingi á Steinamørk
 
  The MIT License (MIT)
 
@@ -26,7 +26,7 @@
  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-(function($) {
+(function ($) {
 	$.numbertor = function (element, options) {
 		var defaults = {
 			decimals:          'auto',
@@ -59,20 +59,20 @@
 		};
 
 		var unsanitize = function () {
-			$element.val(unsanitizeNumber($element.val(), plugin.settings.decimals, plugin.settings.decimalSeperator, plugin.settings.thousandSeperator));
+			$element.val(unsanitizeNumber($element.val(), plugin.settings.decimalSeperator, plugin.settings.thousandSeperator));
 		};
-		
+
 		var select = function () {
 			$element.select();
 		};
-		
+
 		var sanitizeNumber = function (number, decimals, decimalSeperator, thousandSeperator) {
 			decimals = decimals === undefined ? 'auto' : decimals;
 			decimalSeperator = decimalSeperator === undefined ? ',' : decimalSeperator;
 			thousandSeperator = thousandSeperator === undefined ? '.' : thousandSeperator;
 			if (number !== '') {
 				number = number.toString();
-				number = number.replace(/[^0-9,\.]/g,'').replace(thousandSeperator, '').replace(decimalSeperator, '.');
+				number = number.replace(new RegExp('[^0-9,.]', 'g'), '').replace(new RegExp('[' + thousandSeperator + ']', 'g'), '').replace(new RegExp('[' + decimalSeperator + ']', 'g'), '.');
 				number = number_format(number, decimals, decimalSeperator, thousandSeperator);
 			} else if (!plugin.settings.allowEmpty) {
 				number = 0;
@@ -81,29 +81,27 @@
 			return number;
 		};
 
-		var unsanitizeNumber = function (number, decimals, decimalSeperator, thousandSeperator) {
-			decimals = decimals === undefined ? 'auto' : decimals;
+		var unsanitizeNumber = function (number, decimalSeperator, thousandSeperator) {
 			decimalSeperator = decimalSeperator === undefined ? ',' : decimalSeperator;
 			thousandSeperator = thousandSeperator === undefined ? '.' : thousandSeperator;
 			if (number !== '') {
-				number = parseFloat(number.toString().replace(thousandSeperator, '').replace(decimalSeperator, '.')).toString().replace('.', decimalSeperator);
+				number = parseFloat(number.toString().replace(new RegExp('[' + thousandSeperator + ']', 'g'), '').replace(new RegExp('[' + decimalSeperator + ']', 'g'), '.')).toString().replace(new RegExp('\\.', 'g'), decimalSeperator);
 			}
 			return number;
 		};
 
 		var number_format = function (number, decimals, dec_point, thousands_sep) {
 			number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
-			var n = !isFinite(+number) ? 0 : +number,
-				prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-				sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-				dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-				s = '',
-				toFixedFix = function (n, prec) {
-					var k = Math.pow(10, prec);
-					return '' + Math.round(n * k) / k;
-				};
+			var n          = !isFinite(+number) ? 0 : +number,
+			    prec       = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+			    sep        = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+			    dec        = (typeof dec_point === 'undefined') ? '.' : dec_point,
+			    toFixedFix = function (n, prec) {
+				    var k = Math.pow(10, prec);
+				    return '' + Math.round(n * k) / k;
+			    };
 			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
-			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+			var s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
 			if (s[0].length > 3) {
 				s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
 			}
@@ -115,7 +113,6 @@
 		};
 
 
-
 		// REMOVE PLUGIN AND REVERT INPUT ELEMENT TO ORIGINAL STATE
 		plugin.destroy = function () {
 			$element.removeClass('numbertor');
@@ -125,15 +122,15 @@
 			$element.unbind('mouseup', unsanitize);
 			$element.show();
 		};
-		
+
 		// Initialize plugin
 		plugin.init();
 	};
 
-	$.fn.numbertor = function(options) {
+	$.fn.numbertor = function (options) {
 		options = options !== undefined ? options : {};
 		return this.each(function () {
-			if (typeof(options) === 'object') {
+			if (typeof (options) === 'object') {
 				if (undefined === $(this).data('numbertor')) {
 					var plugin = new $.numbertor(this, options);
 					$(this).data('numbertor', plugin);
@@ -153,7 +150,7 @@ $(function () {
 		var $this = $(this);
 		var options = {};
 		$.each($this.data(), function (key, value) {
-			if (key.substring(0, 9) == 'numbertor') {
+			if (key.substring(0, 9) === 'numbertor') {
 				var value_temp = value.toString().replace(/'/g, '"');
 				value_temp = $.parseJSON(value_temp);
 				if (typeof value_temp == 'object') {
