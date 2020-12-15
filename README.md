@@ -1,3 +1,6 @@
+DEPRECATED - no longer actively maintained
+==========================================
+
 Numbertor
 =======
 Numbertor is a jQuery-based addon for input boxes, giving them a number sanitizer.
